@@ -1,7 +1,7 @@
 import Foundation
 
-/// 漢字フルネーム → カタカナ
-func kanjiToKatakana(_ text: String) -> String? {
+/// 漢字フルネーム → ひらがな
+func kanjiToHiragana(_ text: String) -> String? {
     // ① Tokenizer を準備
     let cfText   = text as CFString
     let fullRange = CFRange(location: 0, length: CFStringGetLength(cfText))
