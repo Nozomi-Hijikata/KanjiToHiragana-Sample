@@ -32,5 +32,5 @@ func kanjiToHiragana(_ text: String) -> String? {
 
 // ------------------ 動作確認 ------------------
 ["山田太郎", "佐々木志乃", "一二三太郎", "伊集院静", "John Doe", "タナカタロウ"].forEach { name in
-    print(name, "→", kanjiToKatakana(name) ?? "変換失敗")
+    print(name, "→", kanjiToHiragana(name) ?? "変換失敗")
 }
