@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 void main() => runApp(const MyApp());
 
@@ -28,6 +29,8 @@ class _MyHomePageState extends State<MyHomePage> {
   final _kanjiCtrl = TextEditingController();
   final _kanaCtrl = TextEditingController();
 
+  static const _kanaChannel = MethodChannel('kana_converter');
+
   @override
   void initState() {
     super.initState();
@@ -35,10 +38,11 @@ class _MyHomePageState extends State<MyHomePage> {
     _kanjiCtrl.addListener(_onKanjiChanged);
   }
 
-  /// 将来 MethodChannel で置き換える予定のダミー実装
   Future<String> _convertToKana(String kanji) async {
-    // TODO: MethodChannel で iOS/Android ネイティブ変換を呼び出す
-    return kanji; // いまは入力をそのまま返すだけ
+    final hiragana = await _kanaChannel.invokeMethod<String>('toHiragana', {
+      'text': kanji,
+    });
+    return _kanaCtrl.text = hiragana ?? '';
   }
 
   void _onKanjiChanged() async {
